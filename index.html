@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+    Kenyan Education
+    </title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox-assembly/v0.8.0/assembly.min.css' rel='stylesheet'>
+    
+<style>
+    h1 {
+        color: black;
+        background-color: whitesmoke;
+    }
+    h3 {
+        background-color: black
+            border-radius: 5px;
+    }
+    
+/*
+    div {
+        border-style: solid;
+        border-color: aqua;    
+    }
+*/
+    
+</style>
+
+</head>
+
+<body>
+    <!-- Your page... -->
+
+<div class='grid'>
+    <div class='col col--12 col--3-ml p12 pb6 viewport-third viewport-full-ml'>
+
+        <div class='h-full scroll-auto'>
+            <h1 class='txt-headline mb6'>Kenyan Education Characteristics</h1>
+            <p>This section intentionally left blank.
+            
+            </p>
+            
+            <h2 class='txt-xl mt18 mb12'>subheading</h2>
+            <p>This section intentionally left blank.</p>
+            <footer class='mt12 bg-gray-faint txt-s'>
+                <ul>
+                    <li>Explore the raw <a class='link' href='#'>data</a></li>
+                    <li>Map createed by Tom Scholten <a class='link' href='https://www.mapwurks.com/'>Mapwurks</a></li>
+                </ul>
+            </footer>
+        </div>
+    </div>
+    
+    <div class='col col--12 col--9-ml h180 h-full-ml'>
+        <div id="map" class='viewport-twothirds viewport-full-ml bg-blue'></div>
+        
+    </div>
+
+<!-- ui slider -->
+    <div id='slider' class='range w240 bg-white round-ml p12'>
+        
+        <input type='range' />
+    </div>
+
+<!-- legend -->
+    <div id='legend' class='bg-white round-ml p18'>
+    <div id='legend' class='border-black'>   
+        <h3 class='txt-bold mb14 w-full mx-auto'>Legend</h3>
+        <div class='bg-white h180 w240 mx-auto'>
+        
+        Filler Text
+        </div>
+        
+<!--
+        div {
+            border-style: solid'
+            border-color: green;
+        }
+-->
+
+<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+<script async defer src='https://api.mapbox.com/mapbox-assembly/v0.8.0/assembly.js'></script>
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoidHNjaG9sdGVuIiwiYSI6ImNqYWhnOHBiaDFteWkzMnBkazJrZGUzaWEifQ.yQIFH0xDSF8DNeccdgooZA';
+    var map = L.mapbox.map('map', 'mapbox.streets', {
+    center: [-.23, 37.8],
+    zoom: 7,
+    minzoom: 6,
+    maxzoom: 9,
+    maxBounds: L.latLngBounds([-6.22,27.72,],[5.76, 47.83])
+    });
+// create Leaflet control for the legend
+var legend = L.control({
+    position: 'topright'
+});
+legend.onAdd = function(map) {
+    var div = L.DomUtil.get("legend");
+    L.DomEvent.disableScrollPropagation(div);
+    L.DomEvent.disableClickPropagation(div);
+    return div;
+}
+legend.addTo(map);
+// create Leaflet control for the slider
+var sliderControl = L.control({
+    position: 'bottomleft'
+});
+   
+sliderControl.onAdd = function(map) {
+    var controls = L.DomUtil.get("slider");
+    L.DomEvent.disableScrollPropagation(controls);
+    L.DomEvent.disableClickPropagation(controls);
+    return controls;
+}
+sliderControl.addTo(map);
+    
+omnivore.csv('data/Kenya_education.csv').addTo(map);
+    
+</script>
+</body>
+
+</html>
